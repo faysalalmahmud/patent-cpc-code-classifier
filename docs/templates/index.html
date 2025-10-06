@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patent CPC Code Classifier</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    // Translucent background for all glass elements
+                    colors: { 'glass-main': 'rgba(255, 255, 255, 0.04)' }, 
+                    fontFamily: { sans: ['Roboto', 'sans-serif'] },
+                    // Shadow for all glass elements
+                    boxShadow: { 'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)' } 
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Define the moving gradient animation */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* General Glassmorphism Styling for the main card */
+        .glass-element {
+            background-color: var(--tw-colors-glass-main);
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: var(--tw-shadow-glass);
+            transition: all 0.3s ease;
+        }
+        
+        /* Styling for input area */
+        .glass-input {
+            background-color: rgba(255, 255, 255, 0.05); /* Very dark, translucent input */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: #3b82f6; /* Blue focus color */
+        }
+
+        /* SCIENTIFIC/DEEP SPACE GRADIENT BACKGROUND with subtle grid */
+        body {
+            /* Main gradient: Deep blue to violet */
+            background-color: #0b1120; /* Deep space fallback */
+            background-image: 
+                /* Subtle, high-tech grid pattern */
+                repeating-linear-gradient(0deg, rgba(59, 130, 246, 0.05) 0, rgba(59, 130, 246, 0.05) 1px, transparent 1px, transparent 60px), 
+                repeating-linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0, rgba(59, 130, 246, 0.05) 1px, transparent 1px, transparent 60px),
+                /* Main Background Gradient */
+                radial-gradient(circle at top right, #4c1d95 0%, transparent 60%), /* Deep violet */
+                radial-gradient(circle at bottom left, #1d4ed8 0%, transparent 60%), /* Dark blue */
+                #0b1120; 
+            background-size: 100% 100%;
+            min-height: 100vh;
+        }
+
+        /* Custom Output Card Style (Solid Color) */
+        .label-card {
+            opacity: 1; 
+            animation: cardPopIn 0.4s ease-out forwards;
+            min-width: 100px; 
+            min-height: 60px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem; /* Smaller radius for tags */
+            margin-bottom: 0.25rem; 
+            padding: 0.5rem 0.75rem; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+            transition: all 0.3s ease; 
+        }
+
+        /* Animation for Output Cards */
+        .output-tags-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem; 
+            padding-top: 1.5rem; 
+            position: relative;
+        }
+        
+        @keyframes cardPopIn {
+            0% { opacity: 0; transform: translateY(15px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Cascading Animation Delays (FIXED: Moved to CSS classes) */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        /* Title Styling */
+        .classifier-title {
+            /* Moving Gradient Text Styling: Electric Blue/Cyan to accent the scientific theme */
+            background-image: linear-gradient(90deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; 
+            
+            background-size: 200% auto; 
+            animation: gradient-shift 4s linear infinite; 
+
+            padding: 0.5rem 0.5rem; 
+            font-size: 3rem; /* Increased size for impact */
+            margin-bottom: 0.5rem;
+            font-weight: 700; 
+        }
+        
+        /* Media query for mobile font size (FIXED: Moved out of .classifier-title block) */
+        @media (max-width: 640px) {
+            .classifier-title {
+                font-size: 2.25rem; 
+            }
+        }
+        
+        .classifier-subtitle {
+            margin-bottom: 1.5rem; 
+            font-size: 1.125rem;
+            color: #9ca3af; 
+        }
+
+        /* Styling for the glass button */
+        .glass-button {
+            background-color: rgba(59, 130, 246, 0.15); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.5); 
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); 
+
+            color: white; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        .glass-button:hover {
+            background-color: rgba(59, 130, 246, 0.25);
+            border-color: #3b82f6; 
+            transform: scale(1.02);
+        }
+        
+    </style>
+</head>
+<body class="font-sans text-gray-100 flex flex-col items-center justify-between min-h-screen p-4">
+
+    <!-- Header and Main App Container -->
+    <div class="w-full max-w-xl mx-auto pt-8">
+        <div class="text-center">
+            <!-- Title -->
+            <h1 class="classifier-title">Patent CPC Code Classifier</h1>
+            <!-- Subtitle -->
+            <p class="classifier-subtitle">Classify technical descriptions into relevant Cooperative Patent Classification (CPC) codes.</p>
+        </div>
+
+        <!-- Input Form (Main Card) -->
+        <form action="/" method="POST" class="glass-element rounded-2xl p-6 md:p-8">
+            <div class="mb-6">
+                <label for="text-input" class="sr-only">Input Text</label>
+                <!-- Retain user input after submission -->
+                <textarea name="text_input" id="text-input" rows="7" required
+                    class="glass-input w-full p-4 rounded-xl focus:ring-blue-400 focus:border-blue-400 placeholder-gray-400 text-white resize-none text-base transition-all duration-300"
+                    placeholder="Enter the text you want to classify...">{{ text_input or 'Enter the text you want to classify...' }}</textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit"
+                class="glass-button w-full py-3 px-4 rounded-xl text-lg transition-all duration-300 transform">
+                Classify
+            </button>
+        </form>
+
+        <!-- Output Section -->
+        <div class="output-tags-container"> 
+            
+            {% if api_error %}
+                <div class="text-red-400 p-4 rounded-lg bg-red-900/50 border border-red-500 max-w-full text-center">{{ api_error }}</div>
+            
+            {% elif labels %}
+                {% for label in labels %}
+                    {% set score_percent = (label.score * 100) | round(1) %}
+                    
+                    {# Determine the color based on score confidence #}
+                    {% set color_class = 'bg-green-600/90 hover:bg-green-700/80' if label.score > 0.8 else
+                                         ('bg-yellow-600/90 hover:bg-yellow-700/80' if label.score > 0.5 else
+                                         'bg-blue-600/90 hover:bg-blue-700/80') %}
+                    
+                    {# Dynamically apply the delay class (e.g., delay-1, delay-2) #}
+                    <div class="label-tag-wrapper flex justify-center delay-{{ loop.index }}">
+                        <div class="label-card {{ color_class }} hover:scale-[1.05] transition-transform">
+                            <p class="text-base font-bold text-white mb-0">{{ label.label }}</p>
+                            <p class="text-xs font-medium text-white opacity-90">{{ score_percent }}%</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% elif text_input and not labels %}
+                <p class="text-gray-500 text-center">No classifications found for the input text.</p>
+
+            {% else %}
+                <p class="text-gray-500 text-center pt-8">Classification results will appear here after submission.</p>
+            {% endif %}
+
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="w-full text-center py-4">
+        <p class="text-xs text-gray-500">
+            Developed with &hearts; by <a href="https://www.linkedin.com/in/faysalalmahmud" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Faysal Al Mahmud</a>
+        </p>
+    </footer>
+</body>
+</html>
