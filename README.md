@@ -81,7 +81,7 @@ Three transformer models were trained for **multi-label patent CPC classificatio
 
 *(Update metrics after final evaluation)*
 
-**Model Selection:** The model `roberta-base (quantized)` with the **highest F1-score** was chosen for deployment, with **ONNX used for compression and fast inference**.
+**Model Selection:** The model `distilroberta-base (quantized)` with the **Better F1-score and for faster inference** was chosen for deployment, with **ONNX used for compression and fast inference**.
 
 ---
 
@@ -228,7 +228,7 @@ MIT License — see [LICENSE](LICENSE)
 
 **Faysal Al Mahmud**
 GitHub: [@faysalalmahmud](https://github.com/faysalalmahmud)
-Email: [faysalalmahmud@gmail.com](mailto:faysalalmahmud78@gmail.com)
+Email: [faysalalmahmud78@gmail.com](mailto:faysalalmahmud78@gmail.com)
 
 ---
 
