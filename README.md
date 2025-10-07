@@ -26,7 +26,8 @@ The **Patent CPC Code Classifier** predicts multiple CPC codes for a given paten
 1. Download CSV files per search query containing patent URLs.
 2. Scrape each patent to extract: *Publication Number*, *Title*, *Abstract*, and *CPC Codes*.
 3. Raw data: **39,681 records** → Processed dataset: **32,172 records**.
-
+4. After drop duplicates & missing values, **32,172 records** remained.
+5. Initially, **28,021 CPC codes** were identified. After removing **27,892 rare CPC codes** (less than 0.01% of total records), the final dataset contained **129 unique CPC codes**, which were used for model prediction.
 **Data used for model training:** only *abstracts* and *CPC codes*.
 
 **Search Queries:**
