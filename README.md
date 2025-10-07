@@ -95,8 +95,11 @@ The deployment section is placed immediately after model training. The project i
 * Users can input patent abstracts and get predicted CPC codes.
 * Link: [Gradio App](https://faysalalmahmud-patent-cpc-code-classifier.hf.space/)
 
+<br>
+
 **2. Flask App:**
-<img src="deployment/huggingface screenshot.png" height="400">
+<br>
+<img src="docs/flask_app_screenshot.png" height="450">
 * Located in the `docs/` folder.
 * Uses the selected transformer model via **Hugging Face API**.
 * Hosted on **Render** for web access and integration.
