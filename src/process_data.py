@@ -33,6 +33,7 @@ def main():
     df = pd.concat(dataframes_list, ignore_index=True)
     print(f"Initial shape: {df.shape}")
     df.drop_duplicates(inplace=True)
+    df.dropna(inplace=True)
     df.reset_index(drop=True, inplace=True)
     print(df.head(3))
     df['cpc_codes'] = [eval(cpc_code) for cpc_code in df['cpc_codes']]
@@ -44,6 +45,7 @@ def main():
     output_path = Path("data/processed")
     pathlib.Path(output_path).mkdir(parents=True, exist_ok=True)
     df.to_csv('data/processed/processed_patent_details.csv', index=False)
+
 
 
 
