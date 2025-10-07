@@ -120,7 +120,7 @@ def main():
     urls = getting_patent_urls(file_name) 
     patent_details = []
     
-    # Adjust the limit to first 2000 URLs; for full run, use all URLs
+    # Adjust the limit to first 2500 URLs; for full run, use all URLs
     urls_to_scrape = urls[: 2500]  
     
     print(f"Starting parallel scraping of {len(urls_to_scrape)} URLs with {MAX_WORKERS} workers...")
