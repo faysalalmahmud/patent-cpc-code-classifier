@@ -1,9 +1,7 @@
-# Patent CPC Code Classifier
+<h1 align="center"> Patent CPC Code Classifier </h1>
 
 A **multi-label text classification** project to predict **Cooperative Patent Classification (CPC)** codes from patent abstracts. Built using **Hugging Face Transformers**, **fastai**, and **Blurr**, this project covers the full pipeline—from scraping patent data to model training, optimization, and deployment via **Hugging Face Spaces** and **Render**.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ---
 
