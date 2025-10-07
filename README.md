@@ -1,9 +1,7 @@
-# Patent CPC Code Classifier
+<h1 align="center"> Patent CPC Code Classifier </h1>
 
 A **multi-label text classification** project to predict **Cooperative Patent Classification (CPC)** codes from patent abstracts. Built using **Hugging Face Transformers**, **fastai**, and **Blurr**, this project covers the full pipeline—from scraping patent data to model training, optimization, and deployment via **Hugging Face Spaces** and **Render**.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ---
 
@@ -81,7 +79,7 @@ Three transformer models were trained for **multi-label patent CPC classificatio
 
 *(Update metrics after final evaluation)*
 
-**Model Selection:** The model `roberta-base (quantized)` with the **highest F1-score** was chosen for deployment, with **ONNX used for compression and fast inference**.
+**Model Selection:** The model `distilroberta-base (quantized)` with the **Better F1-score and for faster inference** was chosen for deployment, with **ONNX used for compression and fast inference**.
 
 ---
 
@@ -90,14 +88,15 @@ Three transformer models were trained for **multi-label patent CPC classificatio
 The deployment section is placed immediately after model training. The project includes **two deployment options**:
 
 **1. Gradio App:**
-
+<br>
+<img src="deployment/huggingface screenshot.png" height="400">
 * Located in the `deployment/` folder.
 * Hosted on **Hugging Face Spaces** for interactive use.
 * Users can input patent abstracts and get predicted CPC codes.
 * Link: [Gradio App](https://faysalalmahmud-patent-cpc-code-classifier.hf.space/)
 
 **2. Flask App:**
-
+<img src="deployment/huggingface screenshot.png" height="400">
 * Located in the `docs/` folder.
 * Uses the selected transformer model via **Hugging Face API**.
 * Hosted on **Render** for web access and integration.
@@ -228,7 +227,7 @@ MIT License — see [LICENSE](LICENSE)
 
 **Faysal Al Mahmud**
 GitHub: [@faysalalmahmud](https://github.com/faysalalmahmud)
-Email: [faysalalmahmud@gmail.com](mailto:faysalalmahmud78@gmail.com)
+Email: [faysalalmahmud78@gmail.com](mailto:faysalalmahmud78@gmail.com)
 
 ---
 
