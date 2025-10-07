@@ -13,7 +13,7 @@ The **Patent CPC Code Classifier** predicts multiple CPC codes for a given paten
 
 * End-to-end pipeline for **multi-label patent classification**
 * Three transformer models trained: **roberta-base**, **bert-base-uncased**, **distilroberta-base**
-* **ONNX-based model compression** for efficient inference
+* **ONNX quantization** for efficient inference
 * **Gradio app** deployed on Hugging Face Spaces
 * **Flask app** deployed on Render using Hugging Face API
 
@@ -49,7 +49,10 @@ The **Patent CPC Code Classifier** predicts multiple CPC codes for a given paten
 * ` G06N20/00` — Machine learning
 * `G06N3/045` — Combinations of networks
 
-Data saved at: `data/processed/processed_patent_details.csv`
+-Data scraped from [Google Patents](https://patents.google.com/) using `Selenium` <br>
+-Cleaned dataset saved at `data/processed/processed_patent_details.csv` <br>
+-Raw data stored under `data/downloads_patent_urls/` and `data/scraped/`
+
 
 ---
 
@@ -237,7 +240,7 @@ Email: [faysalalmahmud78@gmail.com](mailto:faysalalmahmud78@gmail.com)
 
 ### Acknowledgments
 
-* Google Patents dataset
+* [Google Patents](https://patents.google.com/)
 * CPC system by USPTO & EPO
 * Hugging Face, fastai, and Blurr teams
 * Open-source ML community
