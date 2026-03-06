@@ -97,7 +97,7 @@ The deployment section is placed immediately after model training. The project i
 * Located in the `deployment/` folder.
 * Hosted on **Hugging Face Spaces** for interactive use.
 * Users can input patent abstracts and get predicted CPC codes.
-* Link: [Gradio App](https://faysalalmahmud-patent-cpc-code-classifier.hf.space/)
+* Link: [Gradio App](https://faysalalmahmud-ai-patent-cpc-code-classifier.hf.space/)
 
 <br>
 
@@ -114,8 +114,8 @@ The deployment section is placed immediately after model training. The project i
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/faysalalmahmud/patent-cpc-code-classifier.git
-cd patent-cpc-code-classifier
+git clone https://github.com/faysalalmahmud/ai-patent-cpc-code-classifier.git
+cd ai-patent-cpc-code-classifier
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -135,7 +135,7 @@ pip install -r requirements.txt
 ## 📦 Project Structure
 
 ```
-patent-cpc-code-classifier/
+ai-patent-cpc-code-classifier/
 │
 ├── data/
 │   ├── downloads_patent_urls/
