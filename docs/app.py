@@ -5,7 +5,7 @@ import os # Import os for environment variables if needed
 
 
 # Gradio Space ID (used by the Gradio Client)
-HF_SPACE_ID = "faysalalmahmud/Patent-CPC-Code-Classifier"
+HF_SPACE_ID = "faysalalmahmud/AI-Patent-CPC-Code-Classifier"
 
 app = Flask(__name__)
 
